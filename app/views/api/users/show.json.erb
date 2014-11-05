@@ -1,0 +1,4 @@
+{
+	"users":"show",
+	"users":[<%@users.each do |user|%>"<%=user.name%>"<% if not user.eql? @users.last%>,<% end %><%end%>]
+}

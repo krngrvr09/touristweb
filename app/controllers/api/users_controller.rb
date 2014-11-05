@@ -8,4 +8,11 @@ class Api::UsersController < ApplicationController
           format.json { render :file => "/api/users/showdata.json.erb", :content_type => 'application/json' }
        end
         end
+        def show
+        	@users = User.all
+       respond_to do |format|
+          format.json { render :file => "/api/users/show.json.erb", :content_type => 'application/json' }
+       end
+        	
+        end
 end
