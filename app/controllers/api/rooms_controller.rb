@@ -3,13 +3,11 @@ def create
     @room = Room.new(room_params)
 
     respond_to do |format|
-      if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
-        format.json { render :show, status: :created, location: @room }
-      else
-        format.html { render :new }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+        if @room.save
+            format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
+        else
+            format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
+        end
     end
   end
 
@@ -19,5 +17,9 @@ def show
       format.json { render :file => "/api/rooms/show.json.erb", :content_type => 'application/json' }
   end
 end
+    def room_params
+      params.require(:room).permit(:accessPoint, :name)
+    end
+
        
 end

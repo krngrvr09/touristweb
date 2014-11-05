@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace "api", :defaults => {:format => "json"} do
     post '/showdata', to: 'users#showdata'
     post '/rooms/show', to: 'rooms#show'
+    post '/rooms/create', to: 'rooms#create'
     post '/users/show', to: 'users#show'
   end
   # The priority is based upon order of creation: first created -> highest priority.
