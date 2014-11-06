@@ -1,3 +1,4 @@
 {
-	"roomnames":[<%@rooms.each do |room|%>"<%=room.name%>"<% if not room.eql? @rooms.last%>,<% end %><%end%>]
+	"roomnames":[<%@rooms.each do |room|%>"<%=room.name%>"<% if not room.eql? @rooms.last%>,<% end %><%end%>],
+	"roomIds":[<%@rooms.each do |room|%><%=room.id%><% if not room.eql? @rooms.last%>,<% end %><%end%>]
 }

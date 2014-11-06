@@ -1,0 +1,4 @@
+{
+		"users":[<%@memberships.each do |member|%><%=member.user_id%><% if not member.eql? @memberships.last%>,<% end %><%end%>]
+
+}

@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
-  resources :users, :defaults => {:format => :json}
+  resources :users
 
   resources :rooms
   namespace "api", :defaults => {:format => "json"} do
     post '/showdata', to: 'users#showdata'
     post '/rooms/show', to: 'rooms#show'
-    post '/rooms/create', to: 'rooms#create'
+    post '/rooms/create/:id', to: 'rooms#create'
     post '/users/show', to: 'users#show'
+    post '/users/showall/:id', to: 'users#showall'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

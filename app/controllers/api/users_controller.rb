@@ -13,6 +13,14 @@ class Api::UsersController < ApplicationController
        respond_to do |format|
           format.json { render :file => "/api/users/show.json.erb", :content_type => 'application/json' }
        end
+end
+       
+       def showall
+       	@memberships = Membership.where(:room_id => params[:id])
+       respond_to do |format|
+          format.json { render :file => "/api/users/showall.json.erb", :content_type => 'application/json' }
+       end
+
         	
         end
 end
