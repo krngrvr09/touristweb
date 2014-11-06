@@ -16,26 +16,13 @@ def create
 
 def show
   @rooms = Room.all
-  @roomCheckedIn = Room.where(:createdById => params[:id]).first.id
+  @roomCheckedIn = User.find(params[:id]).checkedIn
   respond_to do |format|
       format.json { render :file => "/api/rooms/show.json.erb", :content_type => 'application/json' }
   end
 end
 
-def checkin
-  roomId = params[:room_id]
-  userId = params[:user_id]
-  user = User.find(userId)
-  user.checkedIn = roomId
-  respond_to do |format|
-      if user.save
-            format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
-        else
-            format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
-        end
-      end
-    
-end
+
     def room_params
       params.require(:room).permit(:accessPoint, :name)
     end

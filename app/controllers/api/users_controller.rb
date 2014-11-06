@@ -18,9 +18,12 @@ class Api::UsersController < ApplicationController
        
     def showall
        	@memberships = Membership.where(:room_id => params[:id])
-       	@users = Array.new
+       	@usernames = Array.new
+       	@whereusers = Array.new
        	@memberships.each do |member|
-       		@users.push(User.find(member.user_id).name)
+       		@usernames.push(User.find(member.user_id).name)
+       		@whereusers.push(User.find(member.user_id).checkedIn)
+
        	end
        respond_to do |format|
           format.json { render :file => "/api/users/showall.json.erb", :content_type => 'application/json' }
