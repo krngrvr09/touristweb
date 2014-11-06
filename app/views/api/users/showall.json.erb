@@ -1,4 +1,6 @@
 {
-		"users":[<%@memberships.each do |member|%><%=member.user_id%><% if not member.eql? @memberships.last%>,<% end %><%end%>]
+		"userIds":[<%@memberships.each do |member|%><%=member.user_id%><% if not member.eql? @memberships.last%>,<% end %><%end%>],
+		"userNames":[<%@users.each do |user|%>"<%=user%>"<% if not user.eql? @users.last%>,<% end %><%end%>]
+
 
 }

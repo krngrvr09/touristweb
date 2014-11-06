@@ -6,21 +6,53 @@ class Api::UsersController < ApplicationController
       @haha = "hahaha"
   		respond_to do |format|
           format.json { render :file => "/api/users/showdata.json.erb", :content_type => 'application/json' }
-       end
-        end
-        def show
-        	@users = User.all
-       respond_to do |format|
+       	end
+    end
+    
+    def show
+        @users = User.all
+       	respond_to do |format|
           format.json { render :file => "/api/users/show.json.erb", :content_type => 'application/json' }
-       end
-end
+       	end
+	end
        
-       def showall
+    def showall
        	@memberships = Membership.where(:room_id => params[:id])
+       	@users = Array.new
+       	@memberships.each do |member|
+       		@users.push(User.find(member.user_id).name)
+       	end
        respond_to do |format|
           format.json { render :file => "/api/users/showall.json.erb", :content_type => 'application/json' }
-       end
+       end	
+    end
 
-        	
-        end
+    def checkin
+  		roomId = params[:room_id]
+  		userId = params[:user_id]
+  		user = User.find(userId)
+  		user.checkedIn = roomId
+  		respond_to do |format|
+      		if user.save
+            	format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
+        	else
+            	format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
+        	end
+      	end
+	end
+
+	def checkout
+		userId = params[:user_id]
+		user = User.find(userId)
+  		user.checkedIn = 0
+		respond_to do |format|
+      		if user.save
+            	format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
+        	else
+            	format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
+        	end
+      	end
+	end
+
+
 end

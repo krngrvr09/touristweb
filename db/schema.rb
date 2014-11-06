@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141106013229) do
+ActiveRecord::Schema.define(version: 20141106032804) do
 
   create_table "memberships", force: true do |t|
     t.integer  "room_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20141106013229) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "createdById"
   end
 
   create_table "users", force: true do |t|
@@ -32,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141106013229) do
     t.integer  "checkedIn"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
   end
 
 end
