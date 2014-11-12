@@ -56,6 +56,50 @@ class Api::UsersController < ApplicationController
         	end
       	end
 	end
+def updatemac
+  		roomId = params[:room_id]
+  		userId = params[:user_id]
+  		user = User.find(userId)
+  		room = Room.find(roomId)
+  		room.accessPoint = params[:bssid]
+
+  		respond_to do |format|
+      		if room.save
+            	format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
+        	else
+            	format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
+        	end
+      	end
+	end
+def updatetype
+  		roomId = params[:room_id]
+  		userId = params[:user_id]
+  		user = User.find(userId)
+  		room = Room.find(roomId)
+  		membership = Membership.where(:user_id=>userId, :room_id=>roomId).first
+  		membership.type = params[:type]
+  		respond_to do |format|
+      		if membership.save
+            	format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
+        	else
+            	format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
+        	end
+      	end
+	end
+def join
+  		roomId = params[:room_id]
+  		userId = params[:user_id]
+  		user = User.find(userId)
+  		room = Room.find(roomId)
+  		membership = Membership.new(:user_id=>params[:user_id],:room_id=>params[:room_id])
+  		respond_to do |format|
+      		if membership.save
+            	format.json { render :file => "/api/rooms/created.json.erb", :content_type => 'application/json' }
+        	else
+            	format.json { render :file => "/api/rooms/error.json.erb", :content_type => 'application/json' }
+        	end
+      	end
+	end
 
 
 end

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     post '/users/showall/:id', to: 'users#showall'
     post '/checkin/:user_id/:room_id', to: 'users#checkin'
     post '/checkout/:user_id', to: 'users#checkout'
+    post '/updatemac/:user_id/:room_id/:bssid', to: 'users#updatemac'
+    post '/updatetype/:user_id/:room_id/:type', to: 'users#updatetype'
+    post '/joinroom/:user_id/:room_id', to: 'users#join'
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
